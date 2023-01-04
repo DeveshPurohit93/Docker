@@ -1,16 +1,11 @@
+FROM ubuntu
 
-FROM ubuntu:18.04
+ENV DEBIAN_FRONTEND=noninteractive
 
-LABEL Creator: "Devesh"
-    
-RUN apt-get install apache* -y
+RUN apt-get -y  update
 
-ENV APACHE_RUN_USER www-data
-ENV APACHE_RUN_GROUP www-data
-ENV APACHE_LOG_DIR /var/log/apache*
+RUN apt-get -y install apache2
 
 EXPOSE 80
 
-CMD [“apache2ctl”, “-D”, “FOREGROUND”]
-
-
+CMD ["/etc/init.d/apache2" ,"start", "-D",  "FOREGROUND"]
